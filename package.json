@@ -1,0 +1,14 @@
+{
+	"name": "discord-kama-bot",
+	"version": "1.0.0",
+	"description": "",
+	"main": "bot.js",
+	"scripts": {
+		"test": "nodemon bot.js"
+	},
+	"author": "Mitchell",
+	"license": "MIT",
+	"dependencies": {
+		"discordie": "^0.9.0"
+	}
+}
