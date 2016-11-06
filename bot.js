@@ -1,17 +1,6 @@
 "use strict";
 
-//// note: run "npm install lame" in this folder first
 
-// audio example implemented using AudioEncoderStream
-
-// audio decoding using "lame"
-
-// commands:
-// ping
-// vjoin <channelname> -- joins matching channel for current guild
-// vleave
-// play -- plays test.mp3
-// stop
 
 var lame = require('lame');
 var fs = require('fs');
@@ -42,11 +31,11 @@ client.Dispatcher.on("MESSAGE_CREATE", (e) => {
   const channel = e.message.channel;
   const guild = e.message.channel.guild;
 
-  if (content == "ping") {
-    channel.sendMessage("pong");
-  } 
+  if (content == "Что такое игрушка дьявола?") {
+  	play(null, "kama-game.mp3");
+  }
 
-  if (content == "Кама уходи") {
+  if (content == "Кама уходи" || content == "Уходи") {
   	channel.sendMessage("Ща");
     client.Channels
     .filter(channel => channel.type == 2 && channel.joined)
@@ -54,10 +43,10 @@ client.Dispatcher.on("MESSAGE_CREATE", (e) => {
   }
 
   if (content.indexOf("Заходи") == 0) {
-  	e.message.author.getVoiceChannel(guild).join();
+  	e.message.author.getVoiceChannel(guild).join().then(info => play(info, "kama-game.mp3"));
   }
 
-  if (content == "Кама, въеби ему") {
+  if (content == "Кама, въеби ему" || content == "Чааа") {
     if (!client.VoiceConnections.length) {
       return e.message.reply("Ты шабишь чтоли?");
     }
@@ -75,6 +64,14 @@ client.Dispatcher.on("MESSAGE_CREATE", (e) => {
 
   if (content == "Кто твой брат?") {
       return e.message.reply("Дафф, брат, красавец");
+  }
+
+  if (content == "Что умеешь дорогой?") {
+      e.message.reply("-> Кама, въеби ему");
+      e.message.reply("-> Чааа");
+      e.message.reply("-> Заходи");
+      e.message.reply("-> Что такое игрушка дьявола?");
+      e.message.reply("-> Кама уходи");
   }
 });
 
