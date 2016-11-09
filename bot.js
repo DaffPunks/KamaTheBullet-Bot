@@ -126,7 +126,7 @@ client.Dispatcher.on("MESSAGE_CREATE", e => {
     if (startMessage.indexOf("") == 0) {
         const content = startMessage.replace("", "");
 
-        if (content == "Что такое игрушка дьявола?") {
+        if (content == "что такое игрушка дьявола?" || content == "игрушка дьявола") {
             play(null, "kama/kama-game.mp3");
         }
 
@@ -174,6 +174,37 @@ client.Dispatcher.on("MESSAGE_CREATE", e => {
                         list +=     result.title + "\t" + result.duration + "\n";
                         list += "```";
                         channel.sendMessage(list);
+                    } else {
+                        channel.sendMessage("```Not Found```");
+                    }
+
+                });
+        }
+
+        if (content.indexOf("randommeme") == 0 || content.indexOf("rm") == 0) {
+
+            var options = {
+                host: 'api.cleanvoice.ru',
+                path: '/myinstants/?type=single',
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            };
+
+            getJSON(options,
+                function (statusCode, result) {
+                    if (result) {
+                        var list = '```';
+                        list +=  result.id + "\t" + result.title + "\t" + result.duration + "\n";
+                        list += "```";
+                        channel.sendMessage(list);
+
+                        download("http://api.cleanvoice.ru/myinstants/?type=file&id=" + result.id, result.id + ".mp3", function () {
+                            var info = client.VoiceConnections.getForGuild(guild);
+                            if (info) play(info, result.id + ".mp3");
+                        });
+
                     } else {
                         channel.sendMessage("```Not Found```");
                     }
@@ -282,16 +313,22 @@ client.Dispatcher.on("MESSAGE_CREATE", e => {
             }
         }
 
-        if (content == "кто твой брат?") {
-            return e.message.reply("Дафф, брат, красавец");
+        if (content == "кто твой папа?") {
+            return e.message.reply("Дафф, батя, красавец");
         }
 
-        if (content == "что умеешь дорогой?") {
-            e.message.reply("-> Кама, въеби ему");
-            e.message.reply("-> Чааа");
-            e.message.reply("-> Заходи");
-            e.message.reply("-> Что такое игрушка дьявола?");
-            e.message.reply("-> Кама уходи");
+        if (content == "?help?") {
+            channel.sendMessage("```" +
+                "pm \<id\> OR playmeme \<id\> - play meme by id" + "\n" +
+                "sm \<name\> OR searchmeme \<name\> - search meme" + "\n" +
+                "psm \<name\> OR playsearchmeme \<name\> - search and play first meme" +"\n" +
+                "rm OR randommeme - play random meme" +"\n" +
+                "Чааа" + "\n" +
+                "Заходи" + "\n" +
+                "Уходи" + "\n" +
+                "Игрушка дьявола" + "\n" +
+                "Кто твой Папа?" + "\n" +
+                "```");
         }
     }
 });
