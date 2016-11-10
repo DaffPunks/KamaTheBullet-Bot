@@ -105,6 +105,8 @@ client.connect(auth);
 
 
 client.Dispatcher.on("GATEWAY_READY", e => {
+    client.User.setGame("?help? | ЕЖЖИИИ");
+
     const guild = client.Guilds.getBy("name", "Уебеки");
     if (!guild) return console.log("Guild not found");
 
@@ -318,16 +320,16 @@ client.Dispatcher.on("MESSAGE_CREATE", e => {
         }
 
         if (content == "?help?") {
-            channel.sendMessage("```" +
-                "pm \<id\> OR playmeme \<id\> - play meme by id" + "\n" +
-                "sm \<name\> OR searchmeme \<name\> - search meme" + "\n" +
-                "psm \<name\> OR playsearchmeme \<name\> - search and play first meme" +"\n" +
-                "rm OR randommeme - play random meme" +"\n" +
-                "Чааа" + "\n" +
-                "Заходи" + "\n" +
-                "Уходи" + "\n" +
-                "Игрушка дьявола" + "\n" +
-                "Кто твой Папа?" + "\n" +
+            channel.sendMessage("```Markdown" + "\n" +
+                "# pm \<id\> OR playmeme \<id\> - play meme by id" + "\n" +
+                "# sm \<name\> OR searchmeme \<name\> - search meme" + "\n" +
+                "# psm \<name\> OR playsearchmeme \<name\> - search and play first meme" +"\n" +
+                "# rm OR randommeme - play random meme" +"\n" +
+                "# Чааа" + "\n" +
+                "# Заходи" + "\n" +
+                "# Уходи" + "\n" +
+                "# Игрушка дьявола" + "\n" +
+                "# Кто твой Папа?" + "\n" +
                 "```");
         }
     }
