@@ -113,7 +113,8 @@ client.Dispatcher.on("GATEWAY_READY", e => {
     const general = guild.voiceChannels.find(c => c.name == "general");
     if (!general) return console.log("Channel not found");
 
-    return general.join(false, false).then(() => play(null, "kama/kama-game.mp3"));
+    var info = client.VoiceConnections.getForGuild(general);
+    return general.join(false, false).then(() => play(info, "kama/kama-game.mp3"));
 });
 
 /*
@@ -129,7 +130,8 @@ client.Dispatcher.on("MESSAGE_CREATE", e => {
         const content = startMessage.replace("", "");
 
         if (content == "что такое игрушка дьявола?" || content == "игрушка дьявола") {
-            play(null, "kama/kama-game.mp3");
+            var info = client.VoiceConnections.getForGuild(guild);
+            if (info) play(info, "kama/kama-game.mp3");
         }
 
         /**
@@ -299,7 +301,7 @@ client.Dispatcher.on("MESSAGE_CREATE", e => {
             e.message.author.getVoiceChannel(guild).join().then(info => play(info, "kama/kama-game.mp3"));
         }
 
-        if (content == "кама, въеби ему" || content.indexOf("ча") == 0) {
+        if (content == "кама, въеби ему" || content.indexOf("ча") == 0 || content.indexOf("ша") == 0 || content.indexOf("та") == 0) {
             if (!client.VoiceConnections.length) {
                 return e.message.reply("Ты шабишь чтоли?");
             }
@@ -325,7 +327,8 @@ client.Dispatcher.on("MESSAGE_CREATE", e => {
                 "# sm \<name\> OR searchmeme \<name\> - search meme" + "\n" +
                 "# psm \<name\> OR playsearchmeme \<name\> - search and play first meme" +"\n" +
                 "# rm OR randommeme - play random meme" +"\n" +
-                "# Чааа" + "\n" +
+                "# stop - stop playing meme" +"\n" +
+                "# Чааа (Шааа, Тааа)" + "\n" +
                 "# Заходи" + "\n" +
                 "# Уходи" + "\n" +
                 "# Игрушка дьявола" + "\n" +
@@ -336,12 +339,13 @@ client.Dispatcher.on("MESSAGE_CREATE", e => {
 });
 
 client.Dispatcher.on("VOICE_CHANNEL_JOIN", e => {
-    play(null, "kama/smoke.mp3"
-    );
+    var info = client.VoiceConnections.getForGuild(e.channel.guild);
+    if (info) play(info, "kama/smoke.mp3");
 });
 
 client.Dispatcher.on("VOICE_USER_SELF_MUTE", e => {
-    play(null, "kama/calmdown.mp3");
+    var info = client.VoiceConnections.getForGuild(e.channel.guild);
+    if (info) play(info, "kama/calmdown.mp3");
 });
 
 
