@@ -237,7 +237,7 @@ client.Dispatcher.on("MESSAGE_CREATE", e => {
 
             var options = {
                 host: 'api.cleanvoice.ru',
-                path: '/myinstants/?type=many&search=' + target + '&offset=0&limit=10',
+                path: '/myinstants/?type=many&search=' + target + '&offset=0&limit=15',
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json'
