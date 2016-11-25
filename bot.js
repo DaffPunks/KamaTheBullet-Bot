@@ -134,6 +134,11 @@ client.Dispatcher.on("MESSAGE_CREATE", e => {
             if (info) play(info, "kama/kama-game.mp3");
         }
 
+        if (content == "сасать" || content == "sasat") {
+            var info = client.VoiceConnections.getForGuild(guild);
+            if (info) play(info, "kama/sasat.mp3");
+        }
+
         /**
          * KAMA JOIN IN CURRENT SERVER
          */
