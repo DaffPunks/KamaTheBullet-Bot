@@ -1,5 +1,12 @@
 # KamaTheBullet-Bot
 
+### Requirements
+
+```
+Node 18+
+NPM 9+
+```
+
 ### Idleness is a Devil Toy
 
 \*\* https://discordapp.com/oauth2/authorize?client_id=243686494752079872&scope=bot
@@ -11,13 +18,7 @@ Kama likes memes, so he can play them to you.
 ### Command List
 
 ```
- * pm <id> OR playmeme <id> - play meme by id
- * sm <name> OR searchmeme <name> - search meme
- * psm <name> OR playsearchmeme <name> - search and play first meme
- * rm OR randommeme - play random meme
- * Чааа
- * Заходи
- * Уходи
- * Игрушка дьявола
- * Кто твой Папа?
+ * /meme - play random meme
+ * /meme <id> - play meme by id
+ * /search <string> - search meme
 ```
