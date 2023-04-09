@@ -1,3 +1,4 @@
 /node_modules
 /.idea
-/sounds/*.mp3
+/sounds/**.mp3
+/src/config.json

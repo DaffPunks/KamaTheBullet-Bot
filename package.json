@@ -1,14 +1,32 @@
 {
-	"name": "discord-kama-bot",
-	"version": "1.0.0",
-	"description": "",
-	"main": "bot.js",
-	"scripts": {
-		"test": "nodemon bot.js"
-	},
-	"author": "Mitchell",
-	"license": "MIT",
-	"dependencies": {
-		"discordie": "^0.9.0"
-	}
+  "name": "discord-kama-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bot.js",
+  "type": "module",
+  "scripts": {
+    "dev": "node src/index",
+    "start": "nodemon src/index",
+    "deploy": "node src/deploy",
+    "lint": "run-p lint:*",
+    "lint:js": "eslint --ext .js,.ts .",
+    "lint:other": "npm run prettier -- --check",
+    "prettier": "prettier '**/*.{md,yaml,yml,json,js}'"
+  },
+  "author": "Mitchell",
+  "license": "MIT",
+  "dependencies": {
+    "@discordjs/voice": "^0.16.0",
+    "axios": "^1.3.5",
+    "discord.js": "^14.9.0",
+    "ffmpeg-static": "^5.1.0",
+    "libsodium-wrappers": "^0.7.11",
+    "opusscript": "^0.0.8"
+  },
+  "devDependencies": {
+    "@gravity-ui/eslint-config": "^2.0.0",
+    "@gravity-ui/prettier-config": "^1.0.1",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.8.7"
+  }
 }
