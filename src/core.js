@@ -1,39 +1,28 @@
-import {readdirSync} from 'node:fs';
-import {join} from 'node:path';
-
 import {Collection, Events} from 'discord.js';
 
 import client from './app.js';
-import {__DIRNAME} from './constants.js';
-import config from './config.json' assert { type: "json" };
+import commands from './commands/index.js';
+import {token} from './config.js';
 
-const {token} = config; 
-
-(async function () {
-    client.once(Events.ClientReady, (c) => {
-        console.log(`Ready! Logged in as ${c.user.tag}`);
-    });
-
+export const init = () => {
+    // Login
+    client.once(Events.ClientReady, (c) => console.log(`Ready! Logged in as ${c.user.tag}`));
     client.login(token);
 
+    // Initialize commands objects
     client.commands = new Collection();
 
-    const commandsPath = join(__DIRNAME, 'commands');
-    const commandFiles = readdirSync(commandsPath).filter((file) => file.endsWith('.js'));
-
-    for (const file of commandFiles) {
-        const filePath = join(commandsPath, file);
-        const command = await import(filePath);
-
-        if ('data' in command && 'execute' in command) {
-            client.commands.set(command.data.name, command);
+    for (const [key, command] of Object.keys(commands)) {
+        if ('config' in command && 'execute' in command) {
+            client.commands.set(command.config.name, command);
         } else {
             console.log(
-                `[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`,
+                `[WARNING] The command "${key}" is missing a required "data" or "execute" property.`,
             );
         }
     }
 
+    // Initialize commands interaction
     client.on(Events.InteractionCreate, async (interaction) => {
         if (!interaction.isChatInputCommand()) return;
 
@@ -61,4 +50,4 @@ const {token} = config;
             }
         }
     });
-})();
+};

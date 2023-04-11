@@ -2,10 +2,11 @@ import {SlashCommandBuilder} from 'discord.js';
 
 import sdk from '../utils/api.js';
 
-export const data = new SlashCommandBuilder()
+export const config = new SlashCommandBuilder()
     .setName('search')
     .setDescription('Search meme')
     .addStringOption((option) => option.setName('input').setDescription('The input'));
+
 export async function execute(interaction) {
     const string = interaction.options.getString('input');
 

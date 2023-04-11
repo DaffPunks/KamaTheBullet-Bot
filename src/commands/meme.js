@@ -10,10 +10,11 @@ import client from '../app.js';
 import sdk from '../utils/api.js';
 import {downloadSound} from '../utils/common.js';
 
-export const data = new SlashCommandBuilder()
+export const config = new SlashCommandBuilder()
     .setName('meme')
     .setDescription('Play random meme')
     .addStringOption((option) => option.setName('input').setDescription('The input'));
+
 export async function execute(interaction) {
     const searchString = interaction.options.getString('input');
 

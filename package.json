@@ -5,9 +5,9 @@
   "main": "bot.js",
   "type": "module",
   "scripts": {
-    "dev": "node src/index",
+    "dev": "node src/entries/app",
     "start": "nodemon src/index",
-    "deploy": "node src/deploy",
+    "deploy": "node src/entries/deploy-commands",
     "lint": "run-p lint:*",
     "lint:js": "eslint --ext .js,.ts .",
     "lint:other": "npm run prettier -- --check",
